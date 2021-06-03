@@ -3,6 +3,7 @@
     padding: 0%;
     background-color: transparent;
     overflow: hidden;
+    transition: all ease-in-out .3s;
 }
 
 body {
@@ -10,14 +11,16 @@ body {
 }
 
 .grid {
-    height: 40px;
-    width: 5%;
-    margin: 2px;
+    height: 100%;
+    width: 100%;
     background-color: violet;
 
 }
 
 #map {
     display: grid;
-    grid-auto-flow: dense;
+    grid-auto-flow: row;
+    gap: 3px;
+    width: 600px;
+    height: 600px;
 }
