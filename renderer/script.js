@@ -1,7 +1,3 @@
-const fs = require("fs");
-
-document.getElementById("files").innerHTML = fs.readdirSync("./")
-
 function test() {
 	console.log("ja");
 	let y = document.getElementById('map')
@@ -18,7 +14,7 @@ function test() {
 }
 
 function generateMap() {
-    const mapScale = 4
+    const mapScale = 100
     const mapBluePrint = []
     for(i = 0; mapScale >= i; ++i) { //generate Map
         for (j = 0; mapScale >= j; ++j) {
