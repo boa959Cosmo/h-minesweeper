@@ -4,7 +4,7 @@ const path = require('path')
 function createWindow () {
   const win = new BrowserWindow({
 	width: 1200,
-	height: 800,
+	height: 1200,
 	frame: true,
 	transparent: true,
 	webPreferences: {
@@ -15,6 +15,7 @@ function createWindow () {
   })
 
   win.loadFile('./renderer/index.html')
+  win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {

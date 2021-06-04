@@ -1,5 +1,5 @@
-const mapScale = 4
-const bombChance = 30/*%*/;
+const mapScale = 10
+const bombChance = 20/*%*/;
 const mapBluePrint = []
 
 function test() {
@@ -20,14 +20,14 @@ function test() {
 function generateMap() {
     for(i = 0, c =1; mapScale >= i; ++i) { //generate Map
         for (j = 0; mapScale >= j; ++j, ++c) {
-            mapBluePrint.push({x : j, y : i, status: bombDecider(), id: (c)})
+            mapBluePrint.push({x : j, y : i, status: bombDecider(), id: (c), checked: false})
         }
     }
     const map = document.getElementById('map')
     for(i = 0; mapBluePrint.length > i; ++i) { // Apply Map
         let grid = document.createElement('div')
         grid.setAttribute('class', 'grid')
-        grid.setAttribute('id', `${mapBluePrint[i].x}` + `${mapBluePrint[i].y}`)
+        grid.setAttribute('id', i +1 )
         /*grid.addEventListener("mouseenter", () => {
             tt()
         })*/
@@ -60,39 +60,56 @@ function tt(){
 }
 
 function destroyGrid() {
-    event.target.style.background = "transparent"
     console.log(event.target.id)
-    console.log(mapBluePrint[event.target.id].status)
-    reviewer(event.target.id)
+    console.log(mapBluePrint[(parseInt(event.target.id)) - 1])
+    reviewer(parseInt(event.target.id) - 1)
 }
 
-function markGrid(event) {
+function markGrid() {
     event.target.style.background = "red"
 }
 
 function reviewer(ID) {
+    event.target.style.background = "transparent"
+    console.log(mapBluePrint[ID])
     if (mapBluePrint[ID].status == true) {
         alert("you Lost")
     } else if (mapBluePrint[ID].status == false) {
         const x = mapBluePrint[ID].x
         const y = mapBluePrint[ID].y
+        let address = document.getElementById(`${mapBluePrint[ID].id}`)
+        let value = document.createTextNode(checkNeghbours(x, y))
+        address.appendChild(value)
 
-        checkNeghbours(x, y)
+
     }
 }
 
 function checkNeghbours(x, y) {
     const cases = [[-1, -1], [-1 , 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
-    let bombCounter = 0
+    var bombCounter = 0
     cases.forEach(casé => {
         checkX = x + casé[0]
         checkY = y + casé[1]
-        const test = mapBluePrint.fin
-        (element == {x : `${checkX}`, y : `${checkY}`})
-        if (mapBluePrint[checkX].status == true) {
-            ++bombCounter
-        }
-
         console.log(checkX, checkY);
+        mapBluePrint.forEach(async grid => {
+            if (grid.x == checkX && grid.y == checkY && grid.status == true) {
+                ++bombCounter
+            } else if (grid.x == checkX && grid.y == checkY && grid.status == false && grid.checked == false) {
+                grid.checked = true
+                document.getElementById(grid.id).click()
+            }
+        })
+    })
+    return bombCounter
+}
+
+function timer(ms) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(true)
+        }, ms);
     })
 }
+
+generateMap()
