@@ -14,7 +14,8 @@ function createWindow () {
 	}
   })
 
-  win.loadFile('./renderer/index.html')
+  win.loadFile('./renderer/start/start.html')
+  win.loadUrl('./renderer/game/game.html')
   win.webContents.openDevTools()
 }
 

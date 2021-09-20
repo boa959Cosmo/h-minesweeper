@@ -1,0 +1,70 @@
+*{
+  margin: 0%;
+  padding: 0%;
+  background-color: transparent;
+  overflow: hidden;
+  transition: all ease-in-out .3s;
+}
+
+body {
+  background-color: transparent;
+  height: 100%;
+}
+textNode{
+  color:chartreuse;
+}
+#game {
+background-color:cadetblue;
+width: 70%;
+float: left;
+height: 100vh;
+}
+  #map {
+    display: grid;
+    grid-auto-flow: row;
+    padding: 5%;
+    gap: 5px;
+    width: 70%;
+    height: auto;
+  }
+  .grid {
+    width: 100%;
+    padding-top: 50%;
+    padding-bottom:50%;
+    background-color: violet;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+  }
+  .number {
+    color:chartreuse;
+    position:fixed;
+    text-align: center;
+    height: min-content;
+  }
+
+#widget {
+background-color: crimson;
+width: 30%;
+float: left;
+height: 100vh;
+}
+
+  #musicplayer {
+    background-color:darkgreen;
+    width: 70%;
+    height: 200px;
+    margin: auto;
+  }
+  #animation{
+    background-color: darkmagenta;
+    width: 70%;
+    height: 200px;
+    margin: auto;
+  }
+
+
+
+
+
+

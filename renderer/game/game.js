@@ -14,7 +14,7 @@ function startGame() {
 function generateMap() {
   for(i = 0, c =1; mapScale > i; ++i) {  //create4s mapBluePrint 
     for (j = 0; mapScale > j; ++j, ++c) {
-      mapBluePrint.push({x : j, y : i, status: null, value: null, id: (c), checked: false})
+      mapBluePrint.push({x : j, y : i, status: null, value: null, id: (c), checked: 0})
     }
   }
   const map = document.getElementById('map')
@@ -31,7 +31,7 @@ function generateMap() {
 
 function destroyGrid() {
   if(mapBluePrint[(parseInt(event.target.id)) - 1].status == null) { //wenn feld noch nicht validiert wurde soll die Map validiert werden
-    validateMap(event.target.id)              
+    validateMap(parseInt(event.target.id) - 1)            
   }
   genocider(mapBluePrint[(parseInt(event.target.id)) - 1])
 
@@ -46,6 +46,7 @@ function validateMap(clickedGrid) {
   
   //#######################################
   mapBluePrint[clickedGrid].status = false
+  console.log(mapBluePrint[clickedGrid].status);
   //############################## überpüfen ob funktioniert -> funktioniert nicht
   
   for(i = 0; mapBluePrint.length > i; i++) {
@@ -63,11 +64,11 @@ function genocider(clickedGrid) {
       checkX = clickedGrid.x + casé[0]
       checkY = clickedGrid.y + casé[1]
       check = mapBluePrint.filter(function (element) {
-        return element.x == checkX && element.y == checkY  && element.checked == false
+        return element.x == checkX && element.y == checkY  && element.checked < 1
       })
       if(check.length != 0){
         console.log(check)
-        check[0].checked = true
+        check[0].checked++
         document.getElementById(check[0].id).click()        
       }
     })
@@ -97,8 +98,16 @@ function reviewer(ID) {
       alert("you Lost")
   } else if (mapBluePrint[ID].status == false) {
       let address = document.getElementById(`${mapBluePrint[ID].id}`)
+      let number = document.createElement('p')
+      number.setAttribute('class', 'number')
+      number.setAttribute('id', `${mapBluePrint[ID].id}Num`)
+      address.appendChild(number)
+      let getNumber = document.getElementById(`${mapBluePrint[ID].id}Num`)
+      console.log(getNumber)
       let value = document.createTextNode(mapBluePrint[ID].value)
-      address.appendChild(value)
+      
+      getNumber.appendChild(value)
+      
   }
 }
 
